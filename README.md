@@ -1,2 +1,21 @@
-# kumryung.github.io
-Ryan Site
+# RyanFamily · 라이언패밀리
+
+CRM 및 게임 개발 회사 라이언패밀리의 공식 소개 사이트입니다.
+
+- 공식 주소: https://www.ryanfamily.xyz/
+- 문의: ryan@ryanfamily.xyz
+- 순수 HTML, CSS, JavaScript로 구성된 반응형 정적 사이트입니다.
+- 별도의 패키지 설치나 빌드가 필요하지 않습니다.
+- `master` 브랜치의 루트 디렉터리를 GitHub Pages로 배포합니다.
+- 고객 데이터 수집 폼이나 분석 추적 코드를 사용하지 않습니다. 이메일 링크는 방문자의 메일 앱을 엽니다.
+
+## 수정
+
+- `index.html`: 회사 소개, 개발 분야, 문의 정보 및 검색 메타데이터
+- `styles.css`: 반응형 레이아웃과 브랜드 스타일
+- `script.js`: 모바일 메뉴와 이메일 주소 복사
+- `assets/`: 파비콘과 소셜 공유 이미지
+- `CNAME`: 공식 도메인
+- `sitemap.xml`, `robots.txt`: 검색 엔진용 정보
+
+로컬 웹 서버로 확인한 뒤 커밋을 배포 브랜치에 푸시합니다. 공개 페이지에는 저장소 링크, 개인 포트폴리오, 확인되지 않은 고객사 또는 성과 수치를 표시하지 않습니다.

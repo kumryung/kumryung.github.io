@@ -1,901 +1,423 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Ryan Family — 게임의 재미와 프로그램의 쓰임을 만드는 개발자 Ryan.Choi의 포트폴리오">
-  <meta name="theme-color" content="#10110f">
-  <meta property="og:title" content="Ryan Family — Game & Software Developer">
-  <meta property="og:description" content="Playful systems. Practical software. 게임과 프로그램을 만드는 Ryan.Choi의 공간입니다.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://kumryung.github.io/">
-  <title>Ryan Family — Game & Software Developer</title>
-  <style>
-    :root {
-      --ink: #10110f;
-      --paper: #f2efe7;
-      --paper-2: #e5e0d3;
-      --acid: #d7ff45;
-      --blue: #78d8ff;
-      --coral: #ff7657;
-      --muted: #65675f;
-      --line: rgba(16, 17, 15, .17);
-      --shadow: 8px 8px 0 #10110f;
-      --max: 1180px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      background: var(--paper);
-      color: var(--ink);
-      font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", Inter, system-ui, sans-serif;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    button,
-    a {
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    ::selection {
-      color: var(--paper);
-      background: var(--ink);
-    }
-
-    .skip {
-      position: fixed;
-      top: 8px;
-      left: 8px;
-      z-index: 100;
-      padding: 10px 14px;
-      background: var(--acid);
-      border: 2px solid var(--ink);
-      transform: translateY(-150%);
-      transition: transform .2s ease;
-    }
-
-    .skip:focus {
-      transform: translateY(0);
-    }
-
-    .wrap {
-      width: min(var(--max), calc(100% - 40px));
-      margin: 0 auto;
-    }
-
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      border-bottom: 2px solid var(--ink);
-      background: rgba(242, 239, 231, .94);
-      backdrop-filter: blur(12px);
-    }
-
-    .nav-inner {
-      min-height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--ink);
-      font-weight: 900;
-      letter-spacing: -.03em;
-      text-decoration: none;
-    }
-
-    .brand-mark {
-      display: grid;
-      width: 34px;
-      height: 34px;
-      place-items: center;
-      background: var(--acid);
-      border: 2px solid var(--ink);
-      font-size: 12px;
-      box-shadow: 3px 3px 0 var(--ink);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-    }
-
-    .nav-links a:hover,
-    .nav-links a:focus-visible {
-      text-decoration: underline;
-      text-decoration-thickness: 2px;
-      text-underline-offset: 5px;
-    }
-
-    .nav-github {
-      padding: 9px 14px;
-      color: var(--paper) !important;
-      background: var(--ink);
-      border: 2px solid var(--ink);
-    }
-
-    .nav-github:hover,
-    .nav-github:focus-visible {
-      color: var(--ink) !important;
-      background: var(--acid);
-      text-decoration: none !important;
-    }
-
-    .hero {
-      position: relative;
-      min-height: calc(100vh - 72px);
-      display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(300px, .65fr);
-      align-items: center;
-      gap: 70px;
-      padding: 80px 0;
-    }
-
-    .eyebrow {
-      width: fit-content;
-      margin: 0 0 24px;
-      padding: 7px 12px;
-      background: var(--blue);
-      border: 2px solid var(--ink);
-      font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      transform: rotate(-1.2deg);
-    }
-
-    h1 {
-      max-width: 850px;
-      margin: 0;
-      font-size: clamp(70px, 11vw, 154px);
-      font-weight: 950;
-      letter-spacing: -.085em;
-      line-height: .76;
-    }
-
-    h1 span {
-      display: block;
-    }
-
-    .outlined {
-      color: var(--paper);
-      -webkit-text-stroke: 3px var(--ink);
-      text-shadow: 6px 6px 0 var(--acid);
-    }
-
-    .hero-copy {
-      max-width: 650px;
-      margin: 36px 0 0;
-      font-size: clamp(18px, 2vw, 23px);
-      font-weight: 650;
-      letter-spacing: -.025em;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 34px;
-    }
-
-    .button {
-      display: inline-flex;
-      min-height: 52px;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      padding: 0 20px;
-      border: 2px solid var(--ink);
-      color: var(--ink);
-      background: var(--acid);
-      font-weight: 900;
-      text-decoration: none;
-      box-shadow: 5px 5px 0 var(--ink);
-      transition: transform .18s ease, box-shadow .18s ease;
-    }
-
-    .button.secondary {
-      background: var(--paper);
-    }
-
-    .button:hover,
-    .button:focus-visible {
-      transform: translate(3px, 3px);
-      box-shadow: 2px 2px 0 var(--ink);
-    }
-
-    .profile-stack {
-      position: relative;
-      isolation: isolate;
-      width: min(100%, 390px);
-      justify-self: end;
-    }
-
-    .profile-back {
-      position: absolute;
-      inset: -24px 20px 20px -24px;
-      z-index: -1;
-      background: var(--coral);
-      border: 3px solid var(--ink);
-      transform: rotate(-4deg);
-    }
-
-    .profile-card {
-      padding: 18px;
-      background: var(--paper);
-      border: 3px solid var(--ink);
-      box-shadow: var(--shadow);
-      transform: rotate(2deg);
-    }
-
-    .profile-image {
-      display: block;
-      width: 100%;
-      aspect-ratio: 1;
-      object-fit: cover;
-      border: 3px solid var(--ink);
-      background: var(--paper-2);
-      filter: saturate(.85) contrast(1.04);
-    }
-
-    .profile-meta {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 18px 4px 4px;
-    }
-
-    .profile-name {
-      margin: 0;
-      font-size: 26px;
-      font-weight: 950;
-      letter-spacing: -.045em;
-    }
-
-    .profile-id {
-      margin: 2px 0 0;
-      color: var(--muted);
-      font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
-      font-size: 13px;
-    }
-
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 12px;
-      font-weight: 900;
-      white-space: nowrap;
-    }
-
-    .status::before {
-      width: 10px;
-      height: 10px;
-      content: "";
-      border: 2px solid var(--ink);
-      border-radius: 50%;
-      background: var(--acid);
-    }
-
-    .ticker {
-      overflow: hidden;
-      border-block: 2px solid var(--ink);
-      background: var(--ink);
-      color: var(--paper);
-    }
-
-    .ticker-track {
-      display: flex;
-      width: max-content;
-      animation: ticker 28s linear infinite;
-    }
-
-    .ticker-group {
-      display: flex;
-      align-items: center;
-      flex-shrink: 0;
-      gap: 28px;
-      padding: 16px 14px;
-      font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
-      font-size: 14px;
-      font-weight: 800;
-      text-transform: uppercase;
-    }
-
-    .ticker-group span::after {
-      margin-left: 28px;
-      color: var(--acid);
-      content: "◆";
-    }
-
-    @keyframes ticker {
-      to {
-        transform: translateX(-50%);
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="라이언패밀리(RyanFamily)는 CRM과 게임을 개발하는 소프트웨어 회사입니다. 비즈니스의 가능성과 일상의 즐거움을 소프트웨어로 연결합니다."
+    />
+    <meta name="theme-color" content="#f6f5ef" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:site_name" content="RyanFamily · 라이언패밀리" />
+    <meta
+      property="og:title"
+      content="라이언패밀리 — 더 나은 일상, 더 즐거운 세상."
+    />
+    <meta
+      property="og:description"
+      content="비즈니스를 연결하는 CRM부터 새로운 즐거움을 만드는 게임까지. 사람을 위한 소프트웨어를 만듭니다."
+    />
+    <meta property="og:url" content="https://www.ryanfamily.xyz/" />
+    <meta
+      property="og:image"
+      content="https://www.ryanfamily.xyz/assets/social.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://www.ryanfamily.xyz/" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+    <title>라이언패밀리 RyanFamily — CRM & Game Development</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "라이언패밀리",
+        "alternateName": "RyanFamily",
+        "url": "https://www.ryanfamily.xyz/",
+        "email": "ryan@ryanfamily.xyz",
+        "description": "CRM 및 게임 개발을 중심으로 하는 소프트웨어 개발 회사"
       }
-    }
-
-    section {
-      padding: 110px 0;
-      border-bottom: 2px solid var(--ink);
-    }
-
-    .section-head {
-      display: grid;
-      grid-template-columns: 130px 1fr;
-      gap: 38px;
-      margin-bottom: 56px;
-    }
-
-    .section-number {
-      padding-top: 8px;
-      font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
-      font-size: 13px;
-      font-weight: 900;
-    }
-
-    h2 {
-      max-width: 900px;
-      margin: 0;
-      font-size: clamp(44px, 7vw, 88px);
-      font-weight: 950;
-      letter-spacing: -.065em;
-      line-height: .95;
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 70px;
-      align-items: start;
-    }
-
-    .about-lead {
-      margin: 0;
-      font-size: clamp(25px, 3.3vw, 42px);
-      font-weight: 850;
-      letter-spacing: -.045em;
-      line-height: 1.25;
-    }
-
-    .about-note {
-      margin: 0;
-      color: var(--muted);
-      font-size: 17px;
-    }
-
-    .principles {
-      display: grid;
-      gap: 12px;
-      margin-top: 34px;
-    }
-
-    .principle {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 15px 0;
-      border-top: 1px solid var(--line);
-      font-weight: 850;
-    }
-
-    .principle code {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .project-list {
-      display: grid;
-      border-top: 2px solid var(--ink);
-    }
-
-    .project {
-      display: grid;
-      grid-template-columns: 72px 1fr auto;
-      gap: 28px;
-      align-items: center;
-      padding: 34px 10px;
-      border-bottom: 2px solid var(--ink);
-      color: var(--ink);
-      text-decoration: none;
-      transition: background .18s ease, padding .18s ease;
-    }
-
-    .project:hover,
-    .project:focus-visible {
-      padding-inline: 22px;
-      background: var(--acid);
-      outline: none;
-    }
-
-    .project:nth-child(2):hover,
-    .project:nth-child(2):focus-visible {
-      background: var(--blue);
-    }
-
-    .project:nth-child(3):hover,
-    .project:nth-child(3):focus-visible {
-      background: var(--coral);
-    }
-
-    .project-index {
-      font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
-      font-size: 13px;
-      font-weight: 900;
-    }
-
-    .project h3 {
-      margin: 0;
-      font-size: clamp(26px, 4vw, 46px);
-      letter-spacing: -.045em;
-      line-height: 1.05;
-    }
-
-    .project p {
-      margin: 7px 0 0;
-      color: var(--muted);
-      font-size: 14px;
-      font-weight: 650;
-    }
-
-    .project-arrow {
-      display: grid;
-      width: 48px;
-      height: 48px;
-      place-items: center;
-      border: 2px solid var(--ink);
-      font-size: 23px;
-      font-weight: 900;
-    }
-
-    .capabilities {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .capability {
-      min-height: 300px;
-      padding: 26px;
-      border: 2px solid var(--ink);
-      box-shadow: 6px 6px 0 var(--ink);
-    }
-
-    .capability:nth-child(1) {
-      background: var(--acid);
-      transform: rotate(-1deg);
-    }
-
-    .capability:nth-child(2) {
-      background: var(--blue);
-      transform: translateY(18px) rotate(1deg);
-    }
-
-    .capability:nth-child(3) {
-      background: var(--coral);
-      transform: rotate(-.6deg);
-    }
-
-    .capability-tag {
-      margin: 0;
-      font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
-      font-size: 12px;
-      font-weight: 900;
-    }
-
-    .capability h3 {
-      margin: 52px 0 16px;
-      font-size: 32px;
-      letter-spacing: -.04em;
-      line-height: 1.05;
-    }
-
-    .capability p {
-      margin: 0;
-      font-size: 15px;
-      font-weight: 650;
-    }
-
-    .contact {
-      padding-block: 130px;
-      background: var(--ink);
-      color: var(--paper);
-      text-align: center;
-    }
-
-    .contact .eyebrow {
-      margin-inline: auto;
-      color: var(--ink);
-      background: var(--acid);
-    }
-
-    .contact h2 {
-      max-width: 1100px;
-      margin-inline: auto;
-      font-size: clamp(58px, 10vw, 130px);
-    }
-
-    .contact p {
-      max-width: 600px;
-      margin: 28px auto 36px;
-      color: #bbb9b1;
-      font-size: 18px;
-    }
-
-    .contact .button {
-      box-shadow: 5px 5px 0 var(--paper);
-    }
-
-    .contact .button:hover,
-    .contact .button:focus-visible {
-      box-shadow: 2px 2px 0 var(--paper);
-    }
-
-    footer {
-      border-top: 1px solid #343631;
-      background: var(--ink);
-      color: var(--paper);
-    }
-
-    .footer-inner {
-      min-height: 94px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      font-size: 13px;
-    }
-
-    .footer-inner a {
-      color: var(--acid);
-      font-weight: 850;
-      text-underline-offset: 4px;
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity .7s ease, transform .7s ease;
-    }
-
-    .reveal.is-visible {
-      opacity: 1;
-      transform: none;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      .ticker-track {
-        animation: none;
-      }
-
-      .reveal {
-        opacity: 1;
-        transform: none;
-        transition: none;
-      }
-
-      .button,
-      .project {
-        transition: none;
-      }
-    }
-
-    @media (max-width: 900px) {
-      .hero {
-        min-height: auto;
-        grid-template-columns: 1fr;
-        gap: 72px;
-      }
-
-      .profile-stack {
-        width: min(84%, 390px);
-        justify-self: center;
-      }
-
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 38px;
-      }
-
-      .capabilities {
-        grid-template-columns: 1fr;
-      }
-
-      .capability {
-        min-height: 240px;
-      }
-
-      .capability:nth-child(2) {
-        transform: rotate(1deg);
-      }
-    }
-
-    @media (max-width: 620px) {
-      .wrap {
-        width: min(100% - 26px, var(--max));
-      }
-
-      .nav-inner {
-        min-height: 62px;
-      }
-
-      .nav-links a:not(.nav-github) {
-        display: none;
-      }
-
-      .nav-github {
-        padding: 7px 11px;
-        font-size: 12px;
-      }
-
-      .hero {
-        padding: 58px 0 70px;
-      }
-
-      h1 {
-        font-size: clamp(64px, 23vw, 104px);
-      }
-
-      .outlined {
-        -webkit-text-stroke-width: 2px;
-        text-shadow: 4px 4px 0 var(--acid);
-      }
-
-      .hero-copy {
-        font-size: 18px;
-      }
-
-      .hero-actions {
-        display: grid;
-      }
-
-      .button {
-        width: 100%;
-      }
-
-      section {
-        padding: 80px 0;
-      }
-
-      .section-head {
-        grid-template-columns: 1fr;
-        gap: 10px;
-        margin-bottom: 38px;
-      }
-
-      .project {
-        grid-template-columns: 40px 1fr;
-        gap: 12px;
-        padding: 26px 4px;
-      }
-
-      .project-arrow {
-        display: none;
-      }
-
-      .capability {
-        box-shadow: 4px 4px 0 var(--ink);
-      }
-
-      .footer-inner {
-        min-height: 116px;
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-      }
-    }
-  </style>
-</head>
-<body>
-  <a class="skip" href="#main">본문으로 바로가기</a>
-
-  <header class="nav">
-    <div class="wrap nav-inner">
-      <a class="brand" href="#top" aria-label="Ryan Family 홈">
-        <span class="brand-mark">RF</span>
-        <span>Ryan Family</span>
-      </a>
-      <nav class="nav-links" aria-label="주요 메뉴">
-        <a href="#about">소개</a>
-        <a href="#works">프로젝트</a>
-        <a href="#skills">하는 일</a>
-        <a class="nav-github" href="https://github.com/kumryung" target="_blank" rel="noreferrer">GitHub ↗</a>
-      </nav>
-    </div>
-  </header>
-
-  <main id="main">
-    <div id="top" class="wrap hero">
-      <div>
-        <p class="eyebrow">Game &amp; Software Developer · Seoul, KR</p>
-        <h1>
-          <span>Ryan</span>
-          <span class="outlined">Family</span>
-        </h1>
-        <p class="hero-copy">
-          재미있는 규칙을 게임으로 만들고, 반복되는 문제를 프로그램으로 해결합니다.
-          플레이 경험부터 운영 도구까지 끝까지 작동하는 결과물을 좋아합니다.
-        </p>
-        <div class="hero-actions">
-          <a class="button" href="#works">프로젝트 보기 <span aria-hidden="true">↓</span></a>
-          <a class="button secondary" href="https://github.com/kumryung" target="_blank" rel="noreferrer">GitHub 방문 <span aria-hidden="true">↗</span></a>
-        </div>
+    </script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">본문으로 바로가기</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#top" aria-label="라이언패밀리 홈">
+          <svg class="brand-icon" viewBox="0 0 40 40" aria-hidden="true">
+            <path d="M3 7h17v13H3zM20 20h17v13H20z" fill="currentColor" />
+            <path d="M20 7h17v13H20zM3 20h17v13H3z" fill="#eb552d" />
+          </svg>
+          <span>RyanFamily<span class="brand-dot">.</span></span>
+        </a>
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-controls="primary-nav"
+          aria-expanded="false"
+          aria-label="메뉴 열기"
+        >
+          <span></span><span></span>
+        </button>
+        <nav id="primary-nav" aria-label="주 메뉴">
+          <a href="#about">회사 소개</a><a href="#expertise">개발 분야</a
+          ><a href="#approach">함께하는 방식</a
+          ><a class="nav-contact" href="#contact"
+            >문의하기 <span aria-hidden="true">↗</span></a
+          >
+        </nav>
       </div>
-
-      <div class="profile-stack" aria-label="Ryan.Choi 프로필">
-        <div class="profile-back"></div>
-        <article class="profile-card">
-          <img class="profile-image" src="https://avatars.githubusercontent.com/u/10813247?v=4" alt="Ryan.Choi GitHub 프로필 이미지">
-          <div class="profile-meta">
-            <div>
-              <p class="profile-name">Ryan.Choi</p>
-              <p class="profile-id">@kumryung</p>
-            </div>
-            <span class="status">BUILDING</span>
-          </div>
-        </article>
-      </div>
-    </div>
-
-    <div class="ticker" aria-hidden="true">
-      <div class="ticker-track">
-        <div class="ticker-group">
-          <span>Game Systems</span><span>Web Applications</span><span>Automation</span><span>Backend</span><span>Tools</span><span>Prototyping</span>
-        </div>
-        <div class="ticker-group">
-          <span>Game Systems</span><span>Web Applications</span><span>Automation</span><span>Backend</span><span>Tools</span><span>Prototyping</span>
-        </div>
-      </div>
-    </div>
-
-    <section id="about">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <span class="section-number">01 / ABOUT</span>
-          <h2>아이디어를 플레이 가능한 시스템으로.</h2>
-        </div>
-        <div class="about-grid">
-          <p class="about-lead reveal">
-            Ryan Family는 게임의 재미와 소프트웨어의 쓰임을 함께 탐구하는 개인 개발 공간입니다.
+    </header>
+    <main id="main">
+      <section class="hero container" aria-labelledby="hero-title">
+        <div class="hero-content">
+          <p class="eyebrow">
+            <span class="small-square"></span> SOFTWARE FOR PEOPLE
           </p>
-          <div class="reveal">
-            <p class="about-note">
-              작은 프로토타입에서 시작해 게임 로직, 웹 인터페이스, 서버와 자동화 도구까지 연결합니다.
-              복잡한 기술보다 사용자가 느끼는 흐름과 실제 운영에서의 안정성을 먼저 생각합니다.
+          <h1 id="hero-title">
+            더 나은 일상,<br />더 <span class="accent">즐거운</span> 세상<span
+              class="accent"
+              >.</span
+            >
+          </h1>
+          <p class="hero-description">
+            비즈니스를 연결하는 CRM부터<br />새로운 즐거움을 만드는 게임까지.<br
+              class="mobile-break"
+            />
+            라이언패밀리가 만듭니다.
+          </p>
+          <a class="button button-dark" href="#contact"
+            >함께 만들고 싶은 것이 있나요? <span aria-hidden="true">↗</span></a
+          >
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-grid"></div>
+          <span class="art-note note-top">LOGIC MEETS IMAGINATION</span>
+          <svg viewBox="0 0 560 490" class="sculpture" fill="none">
+            <ellipse
+              cx="284"
+              cy="422"
+              rx="188"
+              ry="27"
+              fill="#dfddd3"
+              opacity=".55"
+            />
+            <path d="M82 322 249 226 437 335 270 431Z" fill="#e7e4da" />
+            <path d="m82 322 188 109v16L82 339Z" fill="#d4d0c4" />
+            <path d="m270 431 167-96v17L270 447Z" fill="#bfbbae" />
+            <path d="m294 111 85-49 88 51-85 49Z" fill="#ff895d" />
+            <path d="m294 111 88 51v103l-88-51Z" fill="#ed5c33" />
+            <path d="m382 162 85-49v102l-85 50Z" fill="#c43e1d" />
+            <path
+              d="M119 329V225c0-68 48-103 101-72l53 30v204l-51-30V234c0-21-12-30-24-22-8 5-12 17-12 34v121Z"
+              fill="#222923"
+            />
+            <path d="m220 153 47-28 53 30v204l-47 28V183Z" fill="#3f4940" />
+            <path d="m273 183 47-28-53-30-47 28Z" fill="#667365" />
+            <path d="m338 296 60-35 62 36-61 35Z" fill="#f99064" />
+            <path d="m338 296 61 36v72l-61-35Z" fill="#ed5c33" />
+            <path d="m399 332 61-35v72l-61 35Z" fill="#c43e1d" />
+            <circle cx="137" cy="136" r="39" fill="url(#sphere)" />
+            <path
+              d="m319 35 8 18 19 7-19 8-8 18-7-18-19-8 19-7Z"
+              fill="#eb552d"
+            />
+            <path
+              d="m474 282 5 11 12 5-12 5-5 12-5-12-12-5 12-5Z"
+              fill="#222923"
+            />
+            <path
+              d="M50 267c-37-50 18-104 104-130M428 405c103-23 123-73 86-102"
+              stroke="#adae9e"
+              stroke-dasharray="4 6"
+            />
+            <defs>
+              <radialGradient
+                id="sphere"
+                cx="0"
+                cy="0"
+                r="1"
+                gradientTransform="translate(120 120) rotate(45) scale(63)"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop stop-color="#fffef9" />
+                <stop offset=".6" stop-color="#e6e0cc" />
+                <stop offset="1" stop-color="#bdb8a4" />
+              </radialGradient>
+            </defs>
+          </svg>
+          <span class="art-label label-crm"
+            ><span class="label-dot"></span> Better work.</span
+          ><span class="art-label label-game"><span>✳</span> More play.</span
+          ><span class="art-note note-bottom"
+            >BUILT WITH PURPOSE. MADE WITH CARE.</span
+          >
+        </div>
+        <div class="hero-bottom">
+          <span>소프트웨어로 연결하는 더 많은 가능성</span
+          ><a href="#expertise"
+            >DISCOVER RYANFAMILY <span aria-hidden="true">↓</span></a
+          >
+        </div>
+      </section>
+      <section
+        id="expertise"
+        class="expertise section container"
+        aria-labelledby="expertise-title"
+      >
+        <div class="section-heading">
+          <p class="eyebrow">01 / OUR EXPERTISE</p>
+          <div>
+            <h2 id="expertise-title">다른 두 분야,<br />같은 하나의 기준.</h2>
+            <p>
+              사용하는 사람에게 가치 있는 경험.<br />우리가 소프트웨어를 만드는
+              기준입니다.
             </p>
-            <div class="principles" aria-label="개발 원칙">
-              <div class="principle"><span>Play first</span><code>재미를 먼저 검증</code></div>
-              <div class="principle"><span>Ship useful</span><code>실제로 쓸 수 있게</code></div>
-              <div class="principle"><span>Keep learning</span><code>만들며 계속 개선</code></div>
+          </div>
+        </div>
+        <div class="expertise-grid">
+          <article class="expertise-card crm-card">
+            <div class="card-heading">
+              <span class="service-number">01</span
+              ><span class="service-category">BUSINESS SOFTWARE</span>
+            </div>
+            <h3>일을 더 간결하게.<br /><span>CRM Development</span></h3>
+            <p>
+              고객과의 관계가 비즈니스의 성장으로 이어지도록.<br />흩어진 정보와
+              복잡한 업무를 하나의 흐름으로 연결합니다.
+            </p>
+            <div class="crm-illustration" aria-hidden="true">
+              <div class="crm-window">
+                <div class="window-top">
+                  <span class="mini-logo">rf.</span
+                  ><span>CUSTOMER WORKSPACE</span
+                  ><span class="window-dots">•••</span>
+                </div>
+                <div class="workspace-body">
+                  <div class="workspace-sidebar">
+                    <i></i><i></i><i></i><i></i>
+                  </div>
+                  <div class="workspace-content">
+                    <span class="workspace-title">Connected, simply.</span>
+                    <div class="flow">
+                      <span>고객</span><b>→</b><span>관계</span><b>→</b
+                      ><span class="flow-accent">성장</span>
+                    </div>
+                    <div class="chart">
+                      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i
+                      ><i></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="connection-badge">
+                <span>✓</span> 모든 연결이 한곳에
+              </div>
+            </div>
+            <ul class="service-tags" aria-label="CRM 개발 분야">
+              <li>고객 관리</li>
+              <li>업무 자동화</li>
+              <li>데이터 연결</li>
+            </ul>
+          </article>
+          <article class="expertise-card game-card">
+            <div class="card-heading">
+              <span class="service-number">02</span
+              ><span class="service-category">INTERACTIVE EXPERIENCES</span>
+            </div>
+            <h3>즐거움을 더 새롭게.<br /><span>Game Development</span></h3>
+            <p>
+              작은 호기심이 오래 기억될 경험이 되도록.<br />아이디어에 상상력을
+              더하고, 플레이에 생동감을 담습니다.
+            </p>
+            <div class="game-illustration" aria-hidden="true">
+              <div class="game-orbit orbit-one"></div>
+              <div class="game-orbit orbit-two"></div>
+              <span class="game-spark">✳</span><span class="game-plus">+</span
+              ><svg class="controller" viewBox="0 0 340 230" fill="none">
+                <path
+                  d="M91 52h158c27 0 42 24 50 54l16 65c7 34-24 53-47 30l-39-37H111l-39 37c-23 23-54 4-47-30l16-65c8-30 23-54 50-54Z"
+                  fill="#b2391e"
+                  transform="translate(0 12)"
+                />
+                <path
+                  d="M91 52h158c27 0 42 24 50 54l16 65c7 34-24 53-47 30l-39-37H111l-39 37c-23 23-54 4-47-30l16-65c8-30 23-54 50-54Z"
+                  fill="#fbf4e6"
+                />
+                <path
+                  d="M87 83h20v20h20v20h-20v20H87v-20H67v-20h20Z"
+                  fill="#252c25"
+                />
+                <circle cx="246" cy="92" r="12" fill="#eb552d" />
+                <circle cx="271" cy="117" r="12" fill="#e2a178" />
+                <circle cx="221" cy="117" r="12" fill="#e2a178" />
+                <circle cx="246" cy="142" r="12" fill="#eb552d" />
+                <rect
+                  x="149"
+                  y="112"
+                  width="16"
+                  height="6"
+                  rx="3"
+                  fill="#aaa898"
+                />
+                <rect
+                  x="179"
+                  y="112"
+                  width="16"
+                  height="6"
+                  rx="3"
+                  fill="#aaa898"
+                /></svg
+              ><span class="play-note"
+                >A LITTLE CURIOSITY.<br />A WHOLE NEW WORLD.</span
+              >
+            </div>
+            <ul class="service-tags" aria-label="게임 개발 분야">
+              <li>게임 기획</li>
+              <li>플레이 시스템</li>
+              <li>인터랙티브 콘텐츠</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+      <section id="about" class="about section" aria-labelledby="about-title">
+        <div class="container about-grid">
+          <div>
+            <p class="eyebrow">02 / ABOUT RYANFAMILY</p>
+            <div class="about-symbol" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+            </div>
+            <p class="about-caption">TECHNOLOGY WITH A HUMAN SIDE.</p>
+          </div>
+          <div class="about-copy">
+            <h2 id="about-title">
+              기술의 중심에는,<br />언제나 <span>사람이 있습니다.</span>
+            </h2>
+            <p>
+              라이언패밀리는 CRM과 게임 개발을 중심으로<br
+                class="desktop-break"
+              />
+              일상의 가능성을 넓히는 소프트웨어 회사입니다.
+            </p>
+            <p>
+              업무를 돕는 도구도, 마음을 움직이는 게임도<br
+                class="desktop-break"
+              />
+              결국 사람이 사용하고 경험하는 것.<br />우리는 그 당연한
+              사실에서부터 시작합니다.
+            </p>
+            <div class="about-values">
+              <span>명확한 쓰임</span><span>세심한 경험</span
+              ><span>지속적인 개선</span>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section id="works">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <span class="section-number">02 / WORKS</span>
-          <h2>코드로 남긴 작은 실험들.</h2>
+      </section>
+      <section
+        id="approach"
+        class="approach section container"
+        aria-labelledby="approach-title"
+      >
+        <div class="section-heading">
+          <p class="eyebrow">03 / HOW WE WORK</p>
+          <div>
+            <h2 id="approach-title">
+              좋은 질문에서,<br />좋은 소프트웨어까지.
+            </h2>
+            <p>
+              본질을 이해하고, 함께 구체화합니다.<br />작은 디테일까지 차근차근
+              완성해 갑니다.
+            </p>
+          </div>
         </div>
-        <div class="project-list reveal">
-          <a class="project" href="https://github.com/kumryung/autopuzzledefense-base" target="_blank" rel="noreferrer">
-            <span class="project-index">01</span>
-            <div>
-              <h3>Auto Puzzle Defense</h3>
-              <p>퍼즐과 디펜스 규칙을 결합한 게임 시스템 베이스</p>
+        <ol class="process-list">
+          <li>
+            <div class="process-top">
+              <span>01</span><span aria-hidden="true">↗</span>
             </div>
-            <span class="project-arrow" aria-hidden="true">↗</span>
-          </a>
-          <a class="project" href="https://github.com/kumryung/SmartThingsPublic" target="_blank" rel="noreferrer">
-            <span class="project-index">02</span>
-            <div>
-              <h3>SmartThings Public</h3>
-              <p>생활의 반복을 줄이는 연결과 자동화 실험</p>
+            <h3>이해합니다</h3>
+            <p>어떤 문제를 풀고 싶은지,<br />누구를 위한 경험인지 듣습니다.</p>
+            <span class="process-en">UNDERSTAND</span>
+          </li>
+          <li>
+            <div class="process-top">
+              <span>02</span><span aria-hidden="true">↗</span>
             </div>
-            <span class="project-arrow" aria-hidden="true">↗</span>
-          </a>
-          <a class="project" href="https://github.com/kumryung/ff_lotto" target="_blank" rel="noreferrer">
-            <span class="project-index">03</span>
-            <div>
-              <h3>FF Lotto</h3>
-              <p>작은 아이디어를 빠르게 구현한 유틸리티 프로젝트</p>
+            <h3>설계합니다</h3>
+            <p>
+              핵심에 집중해 방향을 정하고,<br />아이디어를 구체적인 구조로
+              만듭니다.
+            </p>
+            <span class="process-en">DESIGN</span>
+          </li>
+          <li>
+            <div class="process-top">
+              <span>03</span><span aria-hidden="true">↗</span>
             </div>
-            <span class="project-arrow" aria-hidden="true">↗</span>
-          </a>
+            <h3>만듭니다</h3>
+            <p>
+              기능과 경험을 함께 살피며,<br />실제로 작동하는 가치를 구현합니다.
+            </p>
+            <span class="process-en">DEVELOP</span>
+          </li>
+          <li>
+            <div class="process-top">
+              <span>04</span><span aria-hidden="true">↗</span>
+            </div>
+            <h3>다듬습니다</h3>
+            <p>
+              사용자의 관점에서 확인하고,<br />피드백으로 더 나은 답을 찾습니다.
+            </p>
+            <span class="process-en">REFINE</span>
+          </li>
+        </ol>
+      </section>
+      <section
+        id="contact"
+        class="contact section"
+        aria-labelledby="contact-title"
+      >
+        <div class="container">
+          <div class="contact-top">
+            <p class="eyebrow">LET’S MAKE SOMETHING MEANINGFUL.</p>
+            <span class="contact-star" aria-hidden="true">✳</span>
+          </div>
+          <h2 id="contact-title">다음 이야기는,<br />함께 만들어볼까요?</h2>
+          <div class="contact-bottom">
+            <p>
+              CRM 개발, 게임 개발, 그리고 새로운 가능성.<br />여러분의 이야기를
+              들려주세요.
+            </p>
+            <div class="contact-actions">
+              <a class="email-link" href="mailto:ryan@ryanfamily.xyz"
+                >ryan@ryanfamily.xyz <span aria-hidden="true">↗</span></a
+              ><button type="button" class="copy-email" hidden>
+                이메일 주소 복사 <span aria-hidden="true">＋</span></button
+              ><span
+                class="copy-status"
+                role="status"
+                aria-live="polite"
+              ></span>
+            </div>
+          </div>
         </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <a class="brand" href="#top" aria-label="라이언패밀리 맨 위로"
+          ><span>RyanFamily<span class="brand-dot">.</span></span></a
+        ><span class="company-name">라이언패밀리 · 소프트웨어 개발</span
+        ><small
+          >© <span id="year">2026</span> RyanFamily. All rights
+          reserved.</small
+        ><a class="back-top" href="#top" aria-label="맨 위로">↑</a>
       </div>
-    </section>
-
-    <section id="skills">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <span class="section-number">03 / FOCUS</span>
-          <h2>재미와 기능 사이를 연결합니다.</h2>
-        </div>
-        <div class="capabilities">
-          <article class="capability reveal">
-            <p class="capability-tag">01 — GAME</p>
-            <h3>Game Systems</h3>
-            <p>규칙 설계, 프로토타이핑, 밸런스와 반복 플레이를 고려한 게임 로직을 만듭니다.</p>
-          </article>
-          <article class="capability reveal">
-            <p class="capability-tag">02 — SOFTWARE</p>
-            <h3>Web &amp; Tools</h3>
-            <p>사용 흐름이 명확한 웹 화면과 작업 시간을 줄여주는 실용적인 도구를 개발합니다.</p>
-          </article>
-          <article class="capability reveal">
-            <p class="capability-tag">03 — SYSTEM</p>
-            <h3>Automation</h3>
-            <p>서비스, 데이터와 기기를 연결해 반복되는 운영 과정을 더 단순하게 만듭니다.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="contact" aria-labelledby="contact-title">
-      <div class="wrap reveal">
-        <p class="eyebrow">Explore the source</p>
-        <h2 id="contact-title">Let’s build something playable.</h2>
-        <p>새로운 게임 아이디어와 쓸모 있는 프로그램을 계속 만들고 있습니다.</p>
-        <a class="button" href="https://github.com/kumryung" target="_blank" rel="noreferrer">github.com/kumryung <span aria-hidden="true">↗</span></a>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="wrap footer-inner">
-      <span>© <span id="year">2026</span> Ryan Family. Built with curiosity.</span>
-      <a href="#top">맨 위로 ↑</a>
-    </div>
-  </footer>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
-  </script>
-</body>
+    </footer>
+  </body>
 </html>
