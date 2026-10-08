@@ -1,3 +1,8 @@
 .playwright-cli/
 output/
 node_modules/
+.secrets/
+.notifier-state/
+visitor-logs/
+__pycache__/
+*.pyc

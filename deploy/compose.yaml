@@ -12,6 +12,7 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - ./releases:/srv/www:ro
+      - ./visitor-logs:/var/log/visits
     tmpfs:
       - /tmp:size=16m,mode=1777
     cap_drop:
@@ -39,3 +40,43 @@ services:
       options:
         max-size: "5m"
         max-file: "2"
+  notifier:
+    image: python:3.12-slim
+    container_name: ryanfamily-visit-notifier
+    restart: unless-stopped
+    user: "101:101"
+    read_only: true
+    command: ["python", "-B", "/app/visit_notifier.py"]
+    environment:
+      PYTHONUNBUFFERED: "1"
+    volumes:
+      - ./visit_notifier.py:/app/visit_notifier.py:ro
+      - ./visitor-logs:/logs
+      - ./.notifier-state:/state
+    secrets:
+      - telegram_bot_token
+      - telegram_chat_id
+    tmpfs:
+      - /tmp:size=8m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 32
+    mem_limit: 64m
+    healthcheck:
+      test: ["CMD", "python", "-B", "/app/visit_notifier.py", "--health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    logging:
+      driver: json-file
+      options:
+        max-size: "2m"
+        max-file: "2"
+secrets:
+  telegram_bot_token:
+    file: ./.secrets/telegram_bot_token
+  telegram_chat_id:
+    file: ./.secrets/telegram_chat_id
